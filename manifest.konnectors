@@ -5,6 +5,9 @@
   "slug": "feedsfetcher",
   "description": "Fetches your RSS/Atom feeds into your cozy",
   "source": "git://github.com/doubleface/cozy-konnector-feeds.git",
+  "fields": {
+    "nb": "Number"
+  },
   "locales": {
     "fr": {
       "description": "Récupère vor flux RSS/Atom dans votre cozy",
