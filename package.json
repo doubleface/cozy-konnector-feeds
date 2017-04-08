@@ -7,7 +7,7 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "bluebird": "^3.5.0",
-    "cozy-konnector-libs": "^1.0.8",
+    "cozy-konnector-libs": "^1.0.9",
     "debug": "^2.6.3",
     "node-feedparser": "^1.0.1",
     "request-promise": "^4.2.0"
