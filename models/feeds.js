@@ -1,4 +1,4 @@
-const cozy = require('../lib/cozyclient')
+const cozy = require('cozy-konnector-libs/cozyclient')
 const parseOpml = require('node-opml-parser')
 const bb = require('bluebird')
 const parseFeed = require('node-feedparser')

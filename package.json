@@ -7,24 +7,19 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "bluebird": "^3.5.0",
-    "btoa": "^1.1.2",
-    "core-js": "^2.4.1",
-    "cozy-client-js": "^0.1.8",
+    "cozy-konnector-libs": "^1.0.8",
     "debug": "^2.6.3",
-    "env-cmd": "^5.0.0",
-    "isomorphic-fetch": "^2.2.1",
     "node-feedparser": "^1.0.1",
-    "pouchdb": "^6.1.2",
-    "pouchdb-find": "^0.10.5",
-    "regenerator-runtime": "^0.10.3",
     "request-promise": "^4.2.0"
   },
   "scripts": {
     "start": "node ./cmd/feeds fetch 5",
-    "predev": "node lib/gettoken.js",
-    "dev": "env-cmd ./data/env.js npm start"
+    "predev": "env-cmd ./data/env.js cozy-authenticate manifest.konnectors",
+    "dev": "env-cmd ./data/env.js npm start",
+    "standalone": "env-cmd ./data/env_standalone.js npm start"
   },
   "devDependencies": {
+    "env-cmd": "^5.0.0",
     "console.table": "^0.8.0",
     "node-opml-parser": "^1.0.0",
     "request-debug": "^0.2.0"

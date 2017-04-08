@@ -1,4 +1,4 @@
-const cozy = require('../lib/cozyclient')
+const cozy = require('cozy-konnector-libs/cozyclient')
 const bb = require('bluebird')
 const log = require('debug')('models:items')
 

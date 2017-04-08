@@ -10,7 +10,7 @@
   },
   "locales": {
     "fr": {
-      "description": "Récupère vor flux RSS/Atom dans votre cozy",
+      "description": "Récupère vos flux RSS/Atom dans votre cozy",
       "permissions": {
         "feeds": {
           "description": "Utilisé pour réupérer la liste de vos flux"
