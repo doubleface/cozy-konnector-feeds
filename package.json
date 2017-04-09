@@ -16,7 +16,8 @@
     "start": "node ./cmd/feeds fetch 5",
     "predev": "env-cmd ./data/env.js cozy-authenticate manifest.konnectors",
     "dev": "env-cmd ./data/env.js npm start",
-    "standalone": "env-cmd ./data/env_standalone.js npm start"
+    "standalone": "env-cmd ./data/env_standalone.js npm start",
+    "init": "env-cmd ./data/env.js ./cmd/feeds init"
   },
   "devDependencies": {
     "env-cmd": "^5.0.0",

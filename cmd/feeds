@@ -2,9 +2,10 @@
 
 require('console.table')
 const bb = require('bluebird')
+const path = require('path')
+const fs = require('fs')
 const feeds = require('../models/feeds')
 const items = require('../models/items')
-
 const command = process.argv[2]
 
 let cozyFields = {}
@@ -53,11 +54,11 @@ if (command === 'clear') {
 }
 
 if (command === 'init') {
-  let opmlfile = process.argv[3]
-  if (opmlfile == null) run = Promise.reject(new Error('Found no OPML file for the init command'))
+  let opmlfile = path.resolve(__dirname, '..', process.argv[3])
+  console.log(`Resolved OPML file path: ${opmlfile}`)
+  if (!fs.existsSync(opmlfile)) run = Promise.reject(new Error('Found no OPML file for the init command'))
   else {
-    opmlfile = `${__dirname}/${opmlfile}`
-    const opmlstring = require('fs').readFileSync(opmlfile, 'utf-8')
+    const opmlstring = fs.readFileSync(opmlfile, 'utf-8')
     run = feeds.parseOpml(opmlstring)
     .then(items => feeds.add(items))
     .then(count => console.log(`Done. Number of added items : ${count}`))
