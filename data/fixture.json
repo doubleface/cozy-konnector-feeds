@@ -1,0 +1,37 @@
+{
+  "io.cozy.feeds": [
+    {
+      "_id": "e8d0b45844ccf8ab819680eabc03058a",
+      "_rev": "2-afa095f5ae505adf2e2af463b82c04f5",
+      "feedType": "rss",
+      "feedUrl": "https://blog.ticabri.com/rss/",
+      "message": "",
+      "status": true,
+      "title": "ticablog",
+      "updateDate": "2017-04-01T20:01:22.512Z",
+      "url": "https://blog.ticabri.com/"
+    },
+    {
+      "_id": "e8d0b45844ccf8ab819680eabc03094d",
+      "_rev": "2-074f36133b002a9026f5b14ec120c398",
+      "feedType": "rss",
+      "feedUrl": "https://medium.com/feed/usevim",
+      "message": "",
+      "status": true,
+      "title": "usevim",
+      "updateDate": "2017-04-01T20:00:51.003Z",
+      "url": "http://usevim.com"
+    },
+    {
+      "_id": "e8d0b45844ccf8ab819680eabc03168a",
+      "_rev": "2-2c2691280bd64804d6da83029bce75e9",
+      "feedType": "rss",
+      "feedUrl": "https://framabag.org/u/doubleface/?feed&type=home&user_id=1&token=1NzQ2NTU1Y",
+      "sage": "",
+      "status": true,
+      "title": "wallabag — home feed",
+      "updateDate": "2017-04-01T09:13:57.208Z",
+      "url": "https://framabag.org/u/doubleface/"
+    }
+  ]
+}
