@@ -6,7 +6,11 @@
   "description": "Fetches your RSS/Atom feeds into your cozy",
   "source": "git://github.com/doubleface/cozy-konnector-feeds.git",
   "fields": {
-    "nb": "Number"
+    "account": {
+      "doctype": "io.cozy.accounts",
+      "account_type": "feeds",
+      "accountFormat": "nb"
+    }
   },
   "locales": {
     "fr": {
@@ -26,9 +30,14 @@
       "description": "Required to get the list of your feeds",
       "type": "io.cozy.feeds"
     },
-    "files": {
+    "items": {
       "description": "Required to save your feed items",
       "type": "io.cozy.feeditems"
+    },
+    "accounts": {
+      "description": "Required to get the account's data",
+      "type": "io.cozy.accounts",
+      "verbs": ["GET"]
     }
   },
   "developer": {

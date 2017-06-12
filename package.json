@@ -2,27 +2,45 @@
   "name": "cozy-konnector-feeds",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doubleface/cozy-konnector-feeds.git"
+  },
   "keywords": [],
   "author": "",
   "license": "AGPL-3.0",
   "dependencies": {
     "bluebird": "^3.5.0",
-    "cozy-konnector-libs": "^1.0.11",
+    "cozy-konnector-libs": "^2.4.1",
     "debug": "^2.6.3",
     "node-feedparser": "^1.0.1",
     "request-promise": "^4.2.0"
   },
   "scripts": {
     "start": "node ./cmd/feeds fetch 5",
-    "predev": "env-cmd ./data/env.js cozy-authenticate manifest.konnectors",
-    "dev": "env-cmd ./data/env.js npm start",
+    "oauth": "env-cmd ./data/env.js cozy-authenticate manifest.konnector",
+    "predev": "npm run oauth && env-cmd ./data/env.js cozy-init-dev-account ./data/account.txt ./data/env_fields.json",
+    "dev": "env-cmd ./data/env_development.js npm start",
     "standalone": "env-cmd ./data/env_standalone.js npm start",
-    "init": "env-cmd ./data/env.js ./cmd/feeds init"
+    "init": "env-cmd ./data/env.js ./cmd/feeds init",
+    "build": "webpack",
+    "deploy:travis": "git-directory-deploy --username <YOUR_GH_USERNAME> --email <YOUR_EMAIL> --directory build/ --repo=https://$GITHUB_TOKEN@github.com/<USERNAME_GH>/<SLUG_GH>.git",
+    "deploy": "git-directory-deploy --directory build/ --branch build --repo=https://github.com/<USERNAME_GH>/<SLUG_GH>.git"
   },
   "devDependencies": {
-    "env-cmd": "^5.0.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "cz-conventional-changelog": "^2.0.0",
+    "env-cmd": "^5.1.0",
+    "git-directory-deploy": "^1.5.1",
+    "request-debug": "^0.2.0",
+    "standard": "^10.0.2",
+    "webpack": "^2.5.1",
     "console.table": "^0.8.0",
-    "node-opml-parser": "^1.0.0",
-    "request-debug": "^0.2.0"
+    "node-opml-parser": "^1.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
