@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 require('console.table')
 const items = require('../models/items')
 

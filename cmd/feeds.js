@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 require('console.table')
 const bb = require('bluebird')
 const path = require('path')
