@@ -8,11 +8,6 @@ const feeds = require('../models/feeds')
 const items = require('../models/items')
 const command = process.argv[2]
 
-let cozyFields = {}
-if (process.env.COZY_FIELDS) {
-  cozyFields = JSON.parse(process.env.COZY_FIELDS)
-}
-
 let run = null
 
 if (command === 'list') {
@@ -68,7 +63,7 @@ if (command === 'init') {
 }
 
 if (command === 'fetch') {
-  let count = process.argv[3] ? process.argv[3] : cozyFields.nb
+  let count = process.argv[3] ? process.argv[3] : 5
 
   // get the list of feeds sorted by update date
   run = feeds.list()

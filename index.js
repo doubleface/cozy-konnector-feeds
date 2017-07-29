@@ -1,4 +1,9 @@
-process.argv.push('fetch')
-process.argv.push('5')
+'use strict'
 
-require('./cmd/feeds')
+const {BaseKonnector} = require('cozy-konnector-libs')
+
+module.exports = new BaseKonnector(fields => {
+  process.argv.push('fetch')
+  process.argv.push(fields.nb)
+  require('./cmd/feeds')
+})

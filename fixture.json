@@ -21,17 +21,6 @@
       "title": "usevim",
       "updateDate": "2017-04-01T20:00:51.003Z",
       "url": "http://usevim.com"
-    },
-    {
-      "_id": "e8d0b45844ccf8ab819680eabc03168a",
-      "_rev": "2-2c2691280bd64804d6da83029bce75e9",
-      "feedType": "rss",
-      "feedUrl": "https://framabag.org/u/doubleface/?feed&type=home&user_id=1&token=1NzQ2NTU1Y",
-      "sage": "",
-      "status": true,
-      "title": "wallabag — home feed",
-      "updateDate": "2017-04-01T09:13:57.208Z",
-      "url": "https://framabag.org/u/doubleface/"
     }
   ]
 }
