@@ -1,8 +1,7 @@
-const cozy = require('cozy-konnector-libs/cozyclient')
+const {cozyClient, log} = require('cozy-konnector-libs')
 const parseOpml = require('node-opml-parser')
 const bb = require('bluebird')
 const parseFeed = require('node-feedparser')
-const log = require('debug')('models:feeds')
 let request = require('request-promise')
 request = request.defaults({
   headers: {
@@ -23,14 +22,14 @@ class Feeds {
   }
 
   fetch (url) {
-    log(`Fetching ${url}`)
+    log('info', `Fetching ${url}`)
     return request(url)
       .then(content => {
         return new Promise((resolve, reject) => {
           parseFeed(content, function (err, result) {
             if (err) reject(err)
             else {
-              log(`Got ${result.items.length} items`)
+              log('info', `Got ${result.items.length} items`)
               resolve(result.items.map(item => {
                 return {
                   title: item.title,
@@ -49,7 +48,7 @@ class Feeds {
 
   // expected : array of {title, url, feedUrl}
   add (items) {
-    log(`Trying to add ${items.length} items`)
+    log('info', `Trying to add ${items.length} items`)
     let updatedCount = 0
 
     return this.list()
@@ -66,9 +65,9 @@ class Feeds {
     })
     // only add new items in database
     .then(filteredList => {
-      log(`Filtered out list`, filteredList)
+      log('debug', `Filtered out list`, filteredList)
       return bb.each(filteredList, item => {
-        return cozy.data.create('io.cozy.feeds', item)
+        return cozyClient.data.create('io.cozy.feeds', item)
           .then(() => updatedCount++)
       })
     })
@@ -76,22 +75,20 @@ class Feeds {
   }
 
   update (id, attrs) {
-    return cozy.data.updateAttributes('io.cozy.feeds', id, attrs)
+    return cozyClient.data.updateAttributes('io.cozy.feeds', id, attrs)
   }
 
   list () {
-    log(`Listing items`)
-    return cozy.data.defineIndex('io.cozy.feeds', ['_id'])
-    .then(index => cozy.data.query(index, {selector: {_id: {'$gt': ''}}, limit: 1000}))
+    return cozyClient.data.defineIndex('io.cozy.feeds', ['_id'])
+    .then(index => cozyClient.data.query(index, {selector: {_id: {'$gt': ''}}, limit: 1000}))
     .then(list => {
-      log(`Got ${list.length} items`)
       return list
     })
   }
 
   getNbDocs () {
-    return cozy.data.defineIndex('io.cozy.feeds', ['_id'])
-    .then(index => cozy.data.query(index, {selector: {_id: {'$gt': ''}}, limit: 1000}))
+    return cozyClient.data.defineIndex('io.cozy.feeds', ['_id'])
+    .then(index => cozyClient.data.query(index, {selector: {_id: {'$gt': ''}}, limit: 1000}))
     .then(list => list.length)
   }
 
@@ -99,8 +96,8 @@ class Feeds {
     // get all the items and delete them 1 by one
     return this.list()
       .then(list => {
-        log(`Clearing ${list.length} items one by one`)
-        bb.each(list, doc => cozy.data.delete('io.cozy.feeds', doc))
+        log('debug', `Clearing ${list.length} items one by one`)
+        bb.each(list, doc => cozyClient.data.delete('io.cozy.feeds', doc))
       })
   }
 }

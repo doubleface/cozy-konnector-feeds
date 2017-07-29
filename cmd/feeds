@@ -103,6 +103,7 @@ if (command === 'fetch') {
           })
       })
       .catch(err => {
+        console.log(err, 'error in fetch')
         feeds.update(feed._id, {
           updateDate: new Date(),
           status: false,

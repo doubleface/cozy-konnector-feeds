@@ -1,14 +1,13 @@
-const cozy = require('cozy-konnector-libs/cozyclient')
+const {cozyClient, log} = require('cozy-konnector-libs')
 const bb = require('bluebird')
-const log = require('debug')('models:items')
 
 class Items {
   clear () {
     // get all the items and delete them 1 by one
     return this.list()
       .then(list => {
-        log(`Clearing ${list.length} items`)
-        bb.each(list, doc => cozy.data.delete('io.cozy.feeditems', doc))
+        log('info', `Clearing ${list.length} items`)
+        bb.each(list, doc => cozyClient.data.delete('io.cozy.feeditems', doc))
       })
   }
 
@@ -16,7 +15,7 @@ class Items {
   // feedid as String
   // list as array of {title, link, date, image, enclosures, meta}
   add (feedId, list) {
-    log(`Adding ${list.length} items to ${feedId}`)
+    log('info', `Adding ${list.length} items to ${feedId}`)
     let updatedCount = 0
 
     return this.list(feedId)
@@ -33,10 +32,10 @@ class Items {
     })
     // only add new items in database
     .then(filteredList => {
-      log(`Finally adding ${filteredList} to ${feedId}`)
+      log('debug', `Finally adding ${filteredList} to ${feedId}`)
       return bb.each(filteredList, item => {
         item.feed_id = feedId
-        return cozy.data.create('io.cozy.feeditems', item)
+        return cozyClient.data.create('io.cozy.feeditems', item)
           .then(() => updatedCount++)
       })
     })
@@ -44,19 +43,19 @@ class Items {
   }
 
   list (feedId) {
-    return cozy.data.defineIndex('io.cozy.feeditems', ['feed_id'])
+    return cozyClient.data.defineIndex('io.cozy.feeditems', ['feed_id'])
     .then(index => {
       let selector
       if (feedId) selector = {feed_id: feedId} // items from a specific feed
       else selector = {feed_id: {'$gt': ''}} // all items
 
-      return cozy.data.query(index, {selector, limit: 10000})
+      return cozyClient.data.query(index, {selector, limit: 10000})
     })
   }
 
   getNbDocs () {
-    return cozy.data.defineIndex('io.cozy.feeditems', ['_id'])
-    .then(index => cozy.data.query(index, {selector: {_id: {'$gt': ''}}, limit: 10000}))
+    return cozyClient.data.defineIndex('io.cozy.feeditems', ['_id'])
+    .then(index => cozyClient.data.query(index, {selector: {_id: {'$gt': ''}}, limit: 10000}))
     .then(list => list.length)
   }
 }
