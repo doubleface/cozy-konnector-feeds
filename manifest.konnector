@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "name": "Feeds fetcher",
+  "type": "node",
+  "slug": "feedsfetcher",
+  "description": "Fetches your RSS/Atom feeds into your cozy",
+  "source": "git://github.com/doubleface/cozy-konnector-feeds.git",
+  "fields": {
+    "account": {
+      "doctype": "io.cozy.accounts",
+      "account_type": "feeds",
+      "accountFormat": "nb"
+    }
+  },
+  "locales": {
+    "fr": {
+      "description": "Récupère vos flux RSS/Atom dans votre cozy",
+      "permissions": {
+        "feeds": {
+          "description": "Utilisé pour réupérer la liste de vos flux"
+        },
+        "feeditems": {
+          "description": "Utilisé pour sauvegarder vos articles"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "feeds": {
+      "description": "Required to get the list of your feeds",
+      "type": "io.cozy.feeds"
+    },
+    "items": {
+      "description": "Required to save your feed items",
+      "type": "io.cozy.feeditems"
+    },
+    "accounts": {
+      "description": "Required to get the account's data",
+      "type": "io.cozy.accounts",
+      "verbs": ["GET"]
+    }
+  },
+  "developer": {
+    "name": "doubleface",
+    "url": "https://github.com/doubleface"
+  }
+}
